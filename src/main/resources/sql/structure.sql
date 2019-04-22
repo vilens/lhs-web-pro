@@ -18,9 +18,9 @@ CREATE TABLE `local_session` (
  */
 -- 用户
 create table `user` (
-  id bigint(32) unsigned NOT NULL COMMENT '主键ID',
-  username varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '用户名',
-  mobile varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'mobile',
+  id bigint(32) unsigned NOT NULL auto_increment COMMENT '主键ID',
+  username varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+  mobile varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'mobile',
   wx_openid varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   wx_access_token varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   wx_nickname varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -30,8 +30,8 @@ create table `user` (
   wx_country varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   wx_headimgurl varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   wx_privilege varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  create_time datetime NOT NULL,
-  update_time datetime NOT NULL,
+  create_time datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  update_time datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户表';
 
