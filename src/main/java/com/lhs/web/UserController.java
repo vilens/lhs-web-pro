@@ -51,9 +51,8 @@ public class UserController {
     }
 
     @RequestMapping("/findUser")
-    public Object findUser(@RequestBody(required = false) JSONObject jsonRequestBody) {
+    public Object findUser(@RequestBody(required = false) User user) {
         ResultForm<User> resultForm = null;
-        User user = JSONObject.parseObject(jsonRequestBody.toJSONString(), User.class);
         try {
             if (user != null && StringUtils.notEmpty(user.getWxOpenid())) {
                 user = userService.findUser(user);
@@ -70,9 +69,8 @@ public class UserController {
     }
 
     @RequestMapping("/saveUser")
-    public Object addUser(@RequestBody(required = false) JSONObject jsonRequestBody) {
+    public Object addUser(@RequestBody(required = false) User user) {
         ResultForm<?> resultForm = null;
-        User user = JSONObject.parseObject(jsonRequestBody.toJSONString(), User.class);
         int reuslt = 0;
         try {
             if (user != null && StringUtils.notEmpty(user.getWxOpenid())) {

@@ -83,14 +83,15 @@ create table `painter_tag_relation` (
 create table `painter` (
   `id` bigint(32) unsigned NOT NULL COMMENT '主键ID',
   `user_id` bigint(32) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '画家姓名',
-  `head_url` varchar(200) COLLATE utf8mb4_unicode_ci NULL COMMENT '画家头像地址',
-  `painter_value` varchar(50) COLLATE utf8mb4_unicode_ci NULL COMMENT '身价',
-  `sex` INT(2) COLLATE utf8mb4_unicode_ci NULL COMMENT '性别',
-  `birthday` date NULL,
-  `summary` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '简介',
-  `create_time` datetime NOT NULL,
-  `del_flag` INT(2) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '0 已删除 1 未删除',
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '画家姓名',
+  `head_url` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '画家头像地址',
+  `painter_value` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '身价',
+  `city` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '城市',
+  `sex` INT(2) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '性别',
+  `birthday` date DEFAULT NULL,
+  `summary` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '简介',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `del_flag` INT(2) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 1 COMMENT '0 已删除 1 未删除',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='画家表';
 -- 画作表

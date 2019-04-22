@@ -9,6 +9,7 @@
         <result column="name" property="name" />
         <result column="head_url" property="headUrl" />
         <result column="painter_value" property="painterValue" />
+        <result column="city" property="city" />
         <result column="sex" property="sex" />
         <result column="birthday" property="birthday" />
         <result column="summary" property="summary" />

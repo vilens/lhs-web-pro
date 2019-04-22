@@ -1,5 +1,6 @@
 package com.lhs.web;
 
+import com.alibaba.fastjson.JSONObject;
 import com.lhs.entity.Painter;
 import com.lhs.service.PainterService;
 import com.lhs.web.form.PageForm;
@@ -7,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +26,14 @@ public class PainterController {
 
     // 编辑保存画家信息
     @PostMapping("/save")
-    public Object save(Painter painter) {
+    public Object save(@RequestBody(required = false) Painter painter) {
+        System.out.println("painter:" + painter);
+        return null;
+    }
+
+    // 编辑保存画家信息
+    @PostMapping("/find")
+    public Object find(Painter painter) {
         return null;
     }
 
