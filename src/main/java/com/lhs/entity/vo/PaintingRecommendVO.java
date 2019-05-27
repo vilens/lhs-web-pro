@@ -23,6 +23,8 @@ public class PaintingRecommendVO implements Serializable {
 
     private String paintingDesc;
 
+    private String wxOpenid;
+
     public Long getPainterId() {
         return painterId;
     }
@@ -85,5 +87,13 @@ public class PaintingRecommendVO implements Serializable {
 
     public void setPaintingDesc(String paintingDesc) {
         this.paintingDesc = paintingDesc;
+    }
+
+    public String getWxOpenid() {
+        return wxOpenid;
+    }
+
+    public void setWxOpenid(String wxOpenid) {
+        this.wxOpenid = wxOpenid;
     }
 }

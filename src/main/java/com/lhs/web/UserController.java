@@ -60,7 +60,7 @@ public class UserController {
             if (user != null) {
                 resultForm = ResultForm.createSuccess("查询成功", user);
             } else {
-                resultForm = ResultForm.createError(ResultCode.NO_USER, "用户不存在");
+                resultForm = ResultForm.createError(ResultCode.NO_RESULT, "用户不存在");
             }
         } catch (Exception e) {
             resultForm = ResultForm.createError(e.getMessage());

@@ -8,4 +8,17 @@
         <result column="name" property="name" />
     </resultMap>
 
+    <select id="findAll" resultMap="BaseResultMap">
+      select * from painter_tag;
+    </select>
+
+    <select id="findTagByPainterId" resultMap="BaseResultMap">
+      select pt.id,pt.`name`
+        from
+        painter_tag_relation pr
+        INNER JOIN painter p on pr.painter_id = p.id
+        INNER JOIN painter_tag pt on pr.painter_tag_id = pt.id
+        where painter_id = #{painterId};
+    </select>
+
 </mapper>

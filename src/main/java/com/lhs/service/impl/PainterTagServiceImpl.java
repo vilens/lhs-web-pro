@@ -6,6 +6,8 @@ import com.lhs.service.PainterTagService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 画家标签 服务实现类
@@ -17,4 +19,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class PainterTagServiceImpl extends ServiceImpl<PainterTagMapper, PainterTag> implements PainterTagService {
 
+    @Override
+    public List<PainterTag> findAll() {
+        return baseMapper.findAll();
+    }
+
+    @Override
+    public List<PainterTag> findTagByPainterId(Long painterId) {
+        return baseMapper.findTagByPainterId(painterId);
+    }
 }

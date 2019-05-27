@@ -1,6 +1,7 @@
 package com.lhs.web;
 
 import com.lhs.service.LocalSessionService;
+import com.lhs.service.PainterTagService;
 import com.lhs.service.PaintingService;
 import com.lhs.web.form.PageForm;
 import org.slf4j.Logger;
@@ -21,6 +22,7 @@ public class PaintingController {
 
     @Autowired
     private PaintingService paintingService;
+
     @Autowired
     private LocalSessionService localSessionService;
 

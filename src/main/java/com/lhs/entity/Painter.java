@@ -6,6 +6,7 @@ import java.util.Date;
 
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 
@@ -43,12 +44,15 @@ public class Painter extends Model<Painter> {
      * 性别
      */
     private Integer sex;
+
     private Date birthday;
     /**
      * 简介
      */
     private String summary;
     private Date createTime;
+
+    private Integer isAuth;
     /**
      * 0 已删除 1 未删除
      */
@@ -153,6 +157,14 @@ public class Painter extends Model<Painter> {
         this.city = city;
     }
 
+    public Integer getIsAuth() {
+        return isAuth;
+    }
+
+    public void setIsAuth(Integer isAuth) {
+        this.isAuth = isAuth;
+    }
+
     @Override
     protected Serializable pkVal() {
         return this.id;
@@ -168,6 +180,7 @@ public class Painter extends Model<Painter> {
                 ", headUrl=" + headUrl +
                 ", painterValue=" + painterValue +
                 ", sex=" + sex +
+                ", isAuth=" + isAuth +
                 ", birthday=" + birthday +
                 ", summary=" + summary +
                 ", createTime=" + createTime +

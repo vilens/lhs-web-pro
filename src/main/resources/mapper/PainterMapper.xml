@@ -10,6 +10,7 @@
         <result column="head_url" property="headUrl" />
         <result column="painter_value" property="painterValue" />
         <result column="city" property="city" />
+        <result column="is_auth" property="isAuth" />
         <result column="sex" property="sex" />
         <result column="birthday" property="birthday" />
         <result column="summary" property="summary" />
@@ -17,8 +18,39 @@
         <result column="del_flag" property="delFlag" />
     </resultMap>
 
-    <select id="getById" resultMap="BaseResultMap">
-        select * from painter where id = #{value}
+    <resultMap id="voBaseResultMap" extends="BaseResultMap" type="com.lhs.entity.vo.PainterVO" >
+        <result column="wx_openid" property="wxOpenid" />
+    </resultMap>
+
+    <select id="getById" resultMap="voBaseResultMap">
+        select p.*,u.wx_openid
+        from painter p
+        left join user u
+        on p.user_id = u.id
+        where p.id = #{id}
+        and p.del_flag != 1
+    </select>
+
+    <select id="getByUserId" resultMap="voBaseResultMap">
+        select p.*,u.wx_openid
+        from painter p
+        left join user u
+        on p.user_id = u.id
+        where p.user_id = #{userId}
+        and p.del_flag != 1
+    </select>
+
+    <select id="getByOpenid" resultMap="voBaseResultMap">
+        select p.*,u.wx_openid
+        from painter p
+        left join user u
+        on p.user_id = u.id
+        where u.wx_openid = #{openid}
+        and p.del_flag != 1
+    </select>
+
+    <select id="listPainter" resultMap="BaseResultMap">
+        select * from painter
     </select>
 
 </mapper>

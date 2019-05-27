@@ -88,10 +88,11 @@ create table `painter` (
   `painter_value` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '身价',
   `city` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '城市',
   `sex` INT(2) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '性别',
+  `is_auth` INT(2) COLLATE utf8mb4_unicode_ci DEFAULT 0 COMMENT '是否认证通过',
   `birthday` date DEFAULT NULL,
   `summary` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '简介',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `del_flag` INT(2) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 1 COMMENT '0 已删除 1 未删除',
+  `del_flag` INT(2) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 0 COMMENT '1 已删除 0 未删除',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='画家表';
 -- 画作表

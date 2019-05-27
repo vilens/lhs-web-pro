@@ -1,7 +1,11 @@
 package com.lhs.mapper;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.lhs.entity.Painter;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.lhs.entity.vo.PainterVO;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,6 +17,9 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  */
 public interface PainterMapper extends BaseMapper<Painter> {
 
-    public Painter getById(Long id);
+    public PainterVO getById(Long id);
+    public PainterVO getByUserId(Long id);
+    public PainterVO getByOpenid(String openid);
+    public List<Painter> listPainter(Page<Painter> page, Painter painter);
 
 }
