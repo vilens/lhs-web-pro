@@ -13,6 +13,7 @@ public class BaseController {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
+        //
         binder.registerCustomEditor(Date.class, new CustomDateEditor(true));
     }
 
