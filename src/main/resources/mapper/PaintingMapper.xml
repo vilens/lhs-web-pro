@@ -26,8 +26,23 @@
         <result column="del_flag" property="delFlag" />
     </resultMap>
 
+    <resultMap id="voBaseResultMap" extends="BaseResultMap" type="com.lhs.entity.vo.PaintingVO" >
+        <result column="wx_openid" property="wxOpenid" />
+    </resultMap>
+
     <select id="pagePaintingRecommendVO" resultType="com.lhs.entity.vo.PaintingRecommendVO">
 
+    </select>
+
+    <select id="pageByOpenid" resultMap="BaseResultMap">
+        select p.* from painting p
+        INNER join `user` u on p.user_id = u.id
+        where u.wx_openid = #{wxOpenid}
+    </select>
+
+    <select id="selectOneById" resultMap="voBaseResultMap">
+        select * from painting
+        where id = #{paintingId}
     </select>
 
 </mapper>

@@ -6,6 +6,8 @@ import com.lhs.service.RecipientInfoService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 收货信息表 服务实现类
@@ -16,5 +18,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RecipientInfoServiceImpl extends ServiceImpl<RecipientInfoMapper, RecipientInfo> implements RecipientInfoService {
-
+    public List<RecipientInfo> findByOpenid(String wxOpenid) {
+        return baseMapper.findByOpenid(wxOpenid);
+    }
 }

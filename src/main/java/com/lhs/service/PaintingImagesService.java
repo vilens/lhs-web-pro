@@ -1,7 +1,11 @@
 package com.lhs.service;
 
+import com.lhs.entity.Painting;
 import com.lhs.entity.PaintingImages;
 import com.baomidou.mybatisplus.service.IService;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +17,6 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface PaintingImagesService extends IService<PaintingImages> {
 
+    String uploadImage(MultipartFile file) throws Exception;
+    List<PaintingImages> selectList(Long paintingId);
 }

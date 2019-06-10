@@ -43,6 +43,17 @@ public class PainterServiceImpl extends ServiceImpl<PainterMapper, Painter> impl
     }
 
     @Override
+    public PainterVO findOne(PainterVO painterVO) {
+        //TODO
+        return null;
+    }
+
+    @Override
+    public PainterVO findAll(PainterVO painter) {
+        return null;
+    }
+
+    @Override
     public Page<Painter> listPainter(Page<Painter> page,Painter painter) {
         if (page == null) {
             throw new IllegalArgumentException();

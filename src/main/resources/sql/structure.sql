@@ -19,29 +19,33 @@ CREATE TABLE `local_session` (
 -- 用户
 create table `user` (
   id bigint(32) unsigned NOT NULL auto_increment COMMENT '主键ID',
-  username varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
-  mobile varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'mobile',
-  wx_openid varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  wx_access_token varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  wx_nickname varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  wx_sex int(1) COLLATE utf8mb4_unicode_ci DEFAULT '0',
-  wx_city varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  wx_province varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  wx_country varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  wx_headimgurl varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  wx_privilege varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  username varchar(255) DEFAULT NULL COMMENT '用户名',
+  mobile varchar(50) DEFAULT NULL COMMENT 'mobile',
+  wx_openid varchar(200) DEFAULT NULL,
+  wx_access_token varchar(300) DEFAULT NULL,
+  wx_nickname varchar(255) DEFAULT NULL,
+  wx_sex int(1) DEFAULT '0',
+  wx_city varchar(50) DEFAULT NULL,
+  wx_province varchar(50) DEFAULT NULL,
+  wx_country varchar(50) DEFAULT NULL,
+  wx_headimgurl varchar(200) DEFAULT NULL,
+  wx_privilege varchar(200) DEFAULT NULL,
   create_time datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   update_time datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='用户表';
 
 -- 收货信息表
 create table `recipient_info` (
   `id` bigint(32) unsigned NOT NULL COMMENT '主键ID',
   `user_id` bigint(32) COLLATE utf8mb4_unicode_ci NOT NULL,
   `recipient` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '收件人',
-  `address` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '详细地址',
-  `create_time` datetime NOT NULL,
+  `mobile` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '联系方式',
+  `province` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '省',
+  `city` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '市',
+  `district` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '区',
+  `address` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '详细地址',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='收货信息表';
 
@@ -92,7 +96,7 @@ create table `painter` (
   `birthday` date DEFAULT NULL,
   `summary` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '简介',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `del_flag` INT(2) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 0 COMMENT '1 已删除 0 未删除',
+  `del_flag` INT(2) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 1 COMMENT '0 已删除 1 未删除',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='画家表';
 -- 画作表
@@ -101,22 +105,22 @@ create table `painting` (
   `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '画作名称',
   `user_id` bigint(32) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '用户id',
   `painter_id` bigint(32) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '画家id',
-  `classify_id` bigint(32) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '分类id',
-  `url` varchar(200) COLLATE utf8mb4_unicode_ci NULL COMMENT '作品url地址',
-  `price` DECIMAL(13,2) COLLATE utf8mb4_unicode_ci NULL COMMENT '作品价格',
-  `painting_mount` INT(2) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '0 未装裱 1 已装裱',
-  `material_quality` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '材质',
-  `width` int(2) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '宽',
-  `height` int(2) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '高',
-  `location` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '所在地',
-  `weight` int(6) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '权重',
-  `draw_year` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '创作年份',
-  `salability` INT(2) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '0 不可出售 1 可出售',
-  `status` INT(2) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '0 未售出 1 已售出',
-  `personal_letter` VARCHAR(1000) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '作者手札',
-  `create_time` datetime NOT NULL,
-  `modify_time` datetime NOT NULL,
-  `del_flag` INT(2) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '0 已删除 1 未删除',
+  `classify_id` bigint(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '分类id',
+  `url` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '作品url地址',
+  `price` DECIMAL(13,2) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '作品价格',
+  `painting_mount` INT(2) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '0 未装裱 1 已装裱',
+  `material_quality` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '材质',
+  `width` int(2) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '宽',
+  `height` int(2) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '高',
+  `location` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '所在地',
+  `weight` int(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '权重',
+  `draw_year` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '创作年份',
+  `salability` INT(2) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '0 不可出售 1 可出售',
+  `status` INT(2) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '0 未售出 1 已售出',
+  `personal_letter` VARCHAR(1000) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '作者手札',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `del_flag` INT(2) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 1  COMMENT '0 已删除 1 未删除',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='画作表';
 -- 补充图片表
@@ -124,7 +128,7 @@ create table `painting_images` (
   `id` bigint(32) unsigned NOT NULL COMMENT '主键ID',
   `painting_id` bigint(32) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '画作id',
   `img_url` varchar(200) COLLATE utf8mb4_unicode_ci NULL COMMENT '图片url地址',
-  `create_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `del_flag` INT(2) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '0 已删除 1 未删除',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='补充图片表';
@@ -142,8 +146,8 @@ create table `painting_story` (
   `type` INT(2) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '1 文本 2 图片',
   `browse_count` INT(6) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '浏览量',
   `likes` INT(6) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '点赞量',
-  `create_time` datetime NOT NULL,
-  `modify_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `del_flag` INT(2) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '0 已删除 1 未删除',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='画作心路';
@@ -172,8 +176,8 @@ create table `order` (
   `payment_type` INT(2) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '支付类型 1 微信 2 支付宝',
   `desc` varchar(50) COLLATE utf8mb4_unicode_ci NULL COMMENT '订单明细',
   `payment_time` datetime NOT NULL COMMENT '付款时间',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='订单表';
 
@@ -184,8 +188,8 @@ create table `order_flow` (
   `trading_flow_code` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '第三方支付流水',
   `payment_type` INT(2) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '支付类型 1 微信 2 支付宝',
   `status` INT(2) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '状态 1 成功 0 失败',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='订单流水表';
 
@@ -199,7 +203,7 @@ create table `photograph_tag` (
   `time` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '时间字符串',
   `activity` varchar(50) COLLATE utf8mb4_unicode_ci NULL COMMENT '活动名称',
   `photographer` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '摄影师',
-  `create_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='摄影标签表';
 
@@ -210,7 +214,7 @@ create table `photograph_resource` (
   `url` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '图片url地址',
   `md5` varchar(80) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'md5加密',
   `photograph_tag_id` bigint(32) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '摄影图片标签id',
-  `create_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='摄影图片表';
 

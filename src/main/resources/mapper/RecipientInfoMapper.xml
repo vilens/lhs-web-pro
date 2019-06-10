@@ -4,11 +4,23 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.lhs.entity.RecipientInfo">
-        <id column="id" property="id" />
-        <result column="user_id" property="userId" />
-        <result column="recipient" property="recipient" />
-        <result column="address" property="address" />
-        <result column="create_time" property="createTime" />
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="recipient" property="recipient"/>
+        <result column="mobile" property="mobile"/>
+        <result column="province" property="province"/>
+        <result column="city" property="city"/>
+        <result column="district" property="district"/>
+        <result column="address" property="address"/>
+        <result column="create_time" property="createTime"/>
     </resultMap>
 
+    <select id="findByUserid" resultMap="BaseResultMap">
+        select * from recipient_info
+        where user_id = #{id}
+    </select>
+    <select id="findByOpenid" resultMap="BaseResultMap">
+        select * from recipient_info ri inner join `user` u on ri.user_id = u.id
+        where u.wx_openid = #{wxOpenid} order by ri.create_time desc
+    </select>
 </mapper>

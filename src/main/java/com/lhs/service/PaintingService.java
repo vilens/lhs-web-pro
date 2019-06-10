@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.lhs.entity.Painting;
 import com.baomidou.mybatisplus.service.IService;
 import com.lhs.entity.vo.PaintingRecommendVO;
+import com.lhs.entity.vo.PaintingVO;
 
 /**
  * <p>
@@ -17,6 +18,7 @@ public interface PaintingService extends IService<Painting> {
 
     /**
      * 分页显示推荐作品
+     *
      * @param userId
      * @param page
      * @return
@@ -25,4 +27,14 @@ public interface PaintingService extends IService<Painting> {
     Page<PaintingRecommendVO> pageRecommendPaintings(Long userId, Page page) throws Exception;
 
 
+    /**
+     * 分页查找我的作品
+     *
+     * @param page
+     * @return
+     * @throws Exception
+     */
+    Page<Painting> pageByOpenid(Page<Painting> page, String wxOpenid) throws Exception;
+
+    PaintingVO selectOneById(Long paintingId) throws Exception;
 }

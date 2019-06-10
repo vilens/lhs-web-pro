@@ -27,6 +27,10 @@ public class RecipientInfo extends Model<RecipientInfo> {
      * 收件人
      */
 	private String recipient;
+	private String mobile;
+	private String province;
+	private String city;
+	private String district;
     /**
      * 详细地址
      */
@@ -79,6 +83,38 @@ public class RecipientInfo extends Model<RecipientInfo> {
 		return this;
 	}
 
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -90,6 +126,10 @@ public class RecipientInfo extends Model<RecipientInfo> {
 			"id=" + id +
 			", userId=" + userId +
 			", recipient=" + recipient +
+			", mobile=" + mobile +
+			", province=" + province +
+			", city=" + city +
+			", district=" + district +
 			", address=" + address +
 			", createTime=" + createTime +
 			"}";
