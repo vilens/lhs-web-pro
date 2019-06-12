@@ -84,6 +84,24 @@ public class PaintingController extends BaseController {
         return resultForm;
     }
 
+    @RequestMapping("/painterPaintings")
+    public Object painterPaintings(PageForm<Painting> pageForm, String painterId) {
+        ResultForm<?> resultForm = null;
+        try {
+            if (StringUtils.notEmpty(painterId)) {
+                Page<Painting> paintingPage = paintingService.pageByPainterId(pageForm.createPage(), painterId);
+                resultForm = ResultForm.createSuccess("查询成功", paintingPage);
+            } else {
+                resultForm = ResultForm.createError("没有openid");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+            resultForm = ResultForm.createError(e.getMessage());
+        }
+        return resultForm;
+    }
+
     @RequestMapping("/findAll")
     public Object findAll(PageForm<Painting> pageForm) {
         ResultForm<?> resultForm = null;
@@ -118,7 +136,6 @@ public class PaintingController extends BaseController {
     @PostMapping("/recommendPaintings")
     public Object recommendPaintings(PageForm<Painting> pageForm) {
         ResultForm<?> resultForm = null;
-        System.out.println(pageForm.getCurrentPage());
         try {
             Page<Painting> paintingPage = paintingService.selectPage(pageForm.createPage());
             resultForm = ResultForm.createSuccess("查询成功", paintingPage);

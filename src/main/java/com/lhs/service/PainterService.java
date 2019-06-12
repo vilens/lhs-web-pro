@@ -15,9 +15,10 @@ import com.lhs.entity.vo.PainterVO;
  */
 public interface PainterService extends IService<Painter> {
     PainterVO findById(Long id);
+    PainterVO findDetailById(Long id);
     PainterVO findByUserId(Long id);
     PainterVO findByOpenid(String openid);
     PainterVO findOne(PainterVO painter);
     PainterVO findAll(PainterVO painter);
-    Page<Painter> listPainter(Page<Painter> page, Painter painter);
+    Page<PainterVO> listPainter(Page<PainterVO> page, PainterVO painter);
 }

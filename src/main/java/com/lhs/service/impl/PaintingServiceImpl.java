@@ -30,7 +30,7 @@ public class PaintingServiceImpl extends ServiceImpl<PaintingMapper, Painting> i
     PaintingImagesService paintingImagesService;
 
     @Override
-    public Page<PaintingRecommendVO> pageRecommendPaintings(Long userId, Page page) throws Exception {
+    public Page<PaintingRecommendVO> pageRecommendPaintings(Page page) throws Exception {
         // 待实现
         return null;
     }
@@ -40,8 +40,18 @@ public class PaintingServiceImpl extends ServiceImpl<PaintingMapper, Painting> i
         if (page == null) {
             throw new IllegalArgumentException();
         }
-        List<Painting> projectVOS = this.baseMapper.pageByOpenid(page, wxOpenid);
-        page.setRecords(projectVOS);
+        List<Painting> painting = this.baseMapper.pageByOpenid(page, wxOpenid);
+        page.setRecords(painting);
+        return page;
+    }
+
+    @Override
+    public Page<Painting> pageByPainterId(Page<Painting> page, String painterId) throws Exception {
+        if (page == null) {
+            throw new IllegalArgumentException();
+        }
+        List<Painting> painting = this.baseMapper.pageByPainterId(page, painterId);
+        page.setRecords(painting);
         return page;
     }
 

@@ -20,7 +20,22 @@
 
     <resultMap id="voBaseResultMap" extends="BaseResultMap" type="com.lhs.entity.vo.PainterVO" >
         <result column="wx_openid" property="wxOpenid" />
+        <result column="follow_count" property="followCount" />
+        <result column="fans_count" property="fansCount" />
+        <result column="painting_count" property="paintingCount" />
+        <result column="sold_count" property="soldCount" />
     </resultMap>
+
+    <sql id="voBaseSql">
+        select p.*,
+        (select sum(1) from painting where painter_id = p.id )as painting_count,
+        (select sum(1) from painting where painter_id = p.id and `status`=1 )as sold_count,
+        (select sum(1) from follow_painter where user_id = u.id )as follow_count,
+        (select sum(1) from follow_painter where painter_id = p.id )as fans_count
+        from painter p
+        left join `user` u on u.id = p.user_id
+        where p.del_flag = 1
+    </sql>
 
     <select id="getById" resultMap="voBaseResultMap">
         select p.*,u.wx_openid
@@ -49,8 +64,16 @@
         and p.del_flag != 1
     </select>
 
-    <select id="listPainter" resultMap="BaseResultMap">
-        select * from painter
+    <select id="listPainter" resultMap="voBaseResultMap">
+        <include refid="voBaseSql" />
+        <if test="name != null" >
+            and p.name LIKE CONCAT('%',#{name},'%')
+        </if>
+    </select>
+
+    <select id="getDetailById" resultMap="voBaseResultMap">
+        <include refid="voBaseSql" />
+        and p.id = #{id}
     </select>
 
 </mapper>

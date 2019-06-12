@@ -1,11 +1,13 @@
 package com.lhs.service.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.lhs.entity.Painter;
 import com.lhs.entity.vo.PainterVO;
 import com.lhs.mapper.PainterMapper;
 import com.lhs.service.PainterService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.lhs.util.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -22,7 +24,7 @@ import java.util.List;
 @Service
 public class PainterServiceImpl extends ServiceImpl<PainterMapper, Painter> implements PainterService {
     @PostConstruct
-    public void init () {
+    public void init() {
         Object o = this.baseMapper.getById(1L);
         System.out.println(o);
     }
@@ -30,6 +32,11 @@ public class PainterServiceImpl extends ServiceImpl<PainterMapper, Painter> impl
     @Override
     public PainterVO findById(Long id) {
         return baseMapper.getById(id);
+    }
+
+    @Override
+    public PainterVO findDetailById(Long id) {
+        return baseMapper.getDetailById(id);
     }
 
     @Override
@@ -54,11 +61,11 @@ public class PainterServiceImpl extends ServiceImpl<PainterMapper, Painter> impl
     }
 
     @Override
-    public Page<Painter> listPainter(Page<Painter> page,Painter painter) {
+    public Page<PainterVO> listPainter(Page<PainterVO> page, PainterVO painter) {
         if (page == null) {
             throw new IllegalArgumentException();
         }
-        List<Painter> painterList = this.baseMapper.listPainter(page, painter);
+        List<PainterVO> painterList = this.baseMapper.listPainter(page, painter);
         page.setRecords(painterList);
         return page;
     }

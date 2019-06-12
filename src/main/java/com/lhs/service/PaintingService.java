@@ -19,12 +19,11 @@ public interface PaintingService extends IService<Painting> {
     /**
      * 分页显示推荐作品
      *
-     * @param userId
      * @param page
      * @return
      * @throws Exception
      */
-    Page<PaintingRecommendVO> pageRecommendPaintings(Long userId, Page page) throws Exception;
+    Page<PaintingRecommendVO> pageRecommendPaintings(Page page) throws Exception;
 
 
     /**
@@ -35,6 +34,7 @@ public interface PaintingService extends IService<Painting> {
      * @throws Exception
      */
     Page<Painting> pageByOpenid(Page<Painting> page, String wxOpenid) throws Exception;
+    Page<Painting> pageByPainterId(Page<Painting> page, String painterId) throws Exception;
 
     PaintingVO selectOneById(Long paintingId) throws Exception;
 }

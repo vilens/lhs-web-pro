@@ -22,6 +22,7 @@ public interface PaintingMapper extends BaseMapper<Painting> {
     List<PaintingRecommendVO> pagePaintingRecommendVO(Pagination pagination, Long userId);
 
     List<Painting> pageByOpenid(Page<Painting> page, String wxOpenid);
+    List<Painting> pageByPainterId(Page<Painting> page, String painterId);
 
     PaintingVO selectOneById(Long paintingId);
 }

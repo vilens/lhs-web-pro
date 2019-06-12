@@ -40,6 +40,11 @@
         where u.wx_openid = #{wxOpenid}
     </select>
 
+    <select id="pageByPainterId" resultMap="BaseResultMap">
+        select *  from painting
+        where painter_id = #{painterId}
+    </select>
+
     <select id="selectOneById" resultMap="voBaseResultMap">
         select * from painting
         where id = #{paintingId}

@@ -18,8 +18,9 @@ import java.util.List;
 public interface PainterMapper extends BaseMapper<Painter> {
 
     public PainterVO getById(Long id);
+    public PainterVO getDetailById(Long id);
     public PainterVO getByUserId(Long id);
     public PainterVO getByOpenid(String openid);
-    public List<Painter> listPainter(Page<Painter> page, Painter painter);
+    public List<PainterVO> listPainter(Page<PainterVO> page, PainterVO painter);
 
 }

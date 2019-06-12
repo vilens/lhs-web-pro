@@ -7,6 +7,7 @@ import com.lhs.entity.User;
 import com.lhs.entity.vo.PainterVO;
 import com.lhs.service.PainterService;
 import com.lhs.service.PainterTagService;
+import com.lhs.service.PaintingService;
 import com.lhs.web.constant.ResultCode;
 import com.lhs.web.form.PageForm;
 import com.lhs.web.form.ResultForm;
@@ -92,9 +93,9 @@ public class PainterController extends BaseController {
 
     // 画家搜索列表
     @RequestMapping("/list")
-    public Object list(PageForm<Painter> pageForm, Painter painter) {
+    public Object list(PageForm<PainterVO> pageForm, PainterVO painterVO) {
         ResultForm<?> resultForm = null;
-        Page<Painter> painterPage = painterService.listPainter(pageForm.createPage(), painter);
+        Page<PainterVO> painterPage = painterService.listPainter(pageForm.createPage(), painterVO);
         if (painterPage != null && painterPage.getRecords() != null && painterPage.getRecords().size() > 0) {
             resultForm = ResultForm.createSuccess("查询成功", painterPage);
         } else {
@@ -105,8 +106,17 @@ public class PainterController extends BaseController {
 
     // 画家详情信息
     @PostMapping("/painterDetail")
-    public Object painterDetail(Long painterId) {
-        return null;
+    public Object painterDetail(Long id) {
+        ResultForm<?> resultForm = null;
+        if (id != null) {
+            PainterVO painterVO = painterService.findDetailById(id);
+
+            PageForm<PainterVO> pageForm = new PageForm<>(10, 1);
+            resultForm = ResultForm.createSuccess("查询成功", painterVO);
+        } else {
+            resultForm = ResultForm.createError(ResultCode.NO_RESULT, "没有结果");
+        }
+        return resultForm;
     }
 
     // 画家画作list
