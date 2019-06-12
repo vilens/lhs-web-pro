@@ -25,21 +25,4 @@ public class IndexController extends BaseController {
         return "hello";
     }
 
-    // 主页接口
-    @PostMapping("/recommendPaintings")
-    public Object recommendPaintings(PageForm<PaintingRecommendVO> pageForm) {
-        ResultForm<?> resultForm = null;
-        try {
-            if (pageForm == null) {
-                pageForm = new PageForm<>(2, 1);
-            }
-            Page<PaintingRecommendVO> page = paintingService.pageRecommendPaintings(pageForm.createPage());
-            resultForm = ResultForm.createSuccess("查询成功", page);
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error(e.getMessage());
-            resultForm = ResultForm.createError(e.getMessage());
-        }
-        return resultForm;
-    }
 }
